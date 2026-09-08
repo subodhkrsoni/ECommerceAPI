@@ -139,8 +139,6 @@ Entity Framework Core
    │
    ▼
 SQL Server
-Project Structure
-ECommerceAPI/
 │
 ├── Controllers/
 ├── Data/
