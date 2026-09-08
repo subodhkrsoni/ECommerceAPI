@@ -139,6 +139,9 @@ Entity Framework Core
    │
    ▼
 SQL Server
+
+Project Structure
+ECommerceAPI/
 │
 ├── Controllers/
 ├── Data/
@@ -152,6 +155,7 @@ SQL Server
 ├── Program.cs
 ├── ECommerceAPI.csproj
 └── appsettings.example.json
+
 🔑 Authentication & Authorization
 
 The API uses JWT Bearer Authentication.
