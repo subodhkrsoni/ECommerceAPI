@@ -1,4 +1,4 @@
-# 🛒 E-Commerce REST API
+E-Commerce REST API
 
 A backend REST API for an E-Commerce application built using **ASP.NET Core Web API, Entity Framework Core, and SQL Server**.
 
@@ -6,7 +6,7 @@ The project provides APIs for authentication, products, categories, cart managem
 
 ---
 
-## 🚀 Tech Stack
+Tech Stack
 
 - **ASP.NET Core Web API**
 - **.NET 10**
@@ -20,9 +20,9 @@ The project provides APIs for authentication, products, categories, cart managem
 
 ---
 
-## ✨ Features
+Features
 
-### 🔐 Authentication & Authorization
+Authentication & Authorization
 
 - User registration
 - User login
@@ -31,7 +31,7 @@ The project provides APIs for authentication, products, categories, cart managem
 - Role-based authorization
 - Admin and User roles
 
-### 📦 Product Management
+Product Management
 
 - Get all products
 - Search products
@@ -42,7 +42,7 @@ The project provides APIs for authentication, products, categories, cart managem
 - Update product
 - Delete product
 
-### 🛍️ Shopping Cart
+Shopping Cart
 
 - Add product to cart
 - Update quantity
@@ -51,7 +51,7 @@ The project provides APIs for authentication, products, categories, cart managem
 - Stock validation
 - Automatically merge duplicate products in cart
 
-### 🎟️ Coupon Management
+Coupon Management
 
 - Create coupons
 - Update coupons
@@ -62,7 +62,7 @@ The project provides APIs for authentication, products, categories, cart managem
 - Expiry date validation
 - Discount cannot exceed order total
 
-### 🧾 Checkout
+Checkout
 
 - Checkout from cart
 - Create order
@@ -73,7 +73,7 @@ The project provides APIs for authentication, products, categories, cart managem
 - Reduce product stock
 - Clear cart after successful checkout
 
-### 📋 Order Management
+Order Management
 
 - Get orders
 - Get order by ID
@@ -85,9 +85,217 @@ Order status flow:
 
 ```text
 Pending
+   ├──→ Confirmed → Shipped → Delivered
+   │
+   └──→ Cancelled
+
+Payment Management
+UPI payment
+Card payment
+Cash payment
+Payment success/failure simulation
+Transaction ID generation for successful payments
+Prevent duplicate payment for the same order
+Automatically confirm order after successful payment
+Failed payment keeps the order in Pending state
+
+Admin Dashboard
+
+Admin can view:
+
+Total products
+Total customers
+Total orders
+Total revenue
+Pending orders
+Confirmed orders
+Shipped orders
+Delivered orders
+Cancelled orders
+Successful payments
+Failed payments
+
+Project Architecture
+
+The project follows a layered architecture:
+
+Client
+   │
+   ▼
+Controllers
+   │
+   ▼
+Services
+   │
+   ▼
+Repositories
+   │
+   ▼
+Entity Framework Core
+   │
+   ▼
+SQL Server
+
+Project Structure
+
+ECommerceAPI/
+│
+├── Controllers/
+├── Data/
+├── DTOs/
+├── Middleware/
+├── Models/
+├── Repositories/
+├── Services/
+├── Migrations/
+│
+├── Program.cs
+├── ECommerceAPI.csproj
+└── appsettings.example.json
+
+Authentication & Authorization
+
+The API uses JWT Bearer Authentication.
+
+Authentication Flow
+
+Register
    ↓
-Confirmed
+Login
    ↓
-Shipped
+JWT Token
    ↓
-Delivered
+Authorize
+   ↓
+Access Protected APIs
+
+Role-based authorization is implemented for Admin operations.
+
+Database
+
+The application uses SQL Server with Entity Framework Core.
+
+Main Entities
+Users
+Customers
+Categories
+Products
+Carts
+CartItems
+Orders
+OrderItems
+Coupons
+Payments
+
+Entity relationships are configured using Entity Framework Core.
+
+Database migrations are included in the project.
+
+Main API Endpoints
+
+Authentication
+POST /api/Auth/register
+POST /api/Auth/login
+
+Products
+GET    /api/Products
+GET    /api/Products/{id}
+POST   /api/Products
+PUT    /api/Products/{id}
+DELETE /api/Products/{id}
+
+Cart
+GET    /api/Cart
+POST   /api/Cart/items
+PUT    /api/Cart/items/{id}
+DELETE /api/Cart/items/{id}
+DELETE /api/Cart
+
+Checkout
+POST /api/Checkout
+
+Orders
+GET    /api/Orders
+GET    /api/Orders/{id}
+POST   /api/Orders
+PUT    /api/Orders/{id}/status
+DELETE /api/Orders/{id}
+
+Coupons
+GET    /api/Coupons
+GET    /api/Coupons/{id}
+POST   /api/Coupons
+PUT    /api/Coupons/{id}
+DELETE /api/Coupons/{id}
+
+Payments
+GET  /api/Payments
+GET  /api/Payments/{id}
+GET  /api/Payments/order/{orderId}
+POST /api/Payments
+
+Admin Dashboard
+GET /api/AdminDashboard/summary
+
+How to Run
+1. Clone the repository
+git clone https://github.com/subodhkrsoni/ECommerceAPI.git
+
+cd ECommerceAPI
+2. Configure the database
+
+Create your local appsettings.json using:
+
+appsettings.example.json
+
+Configure your SQL Server connection string and JWT settings.
+
+3. Apply database migrations
+dotnet ef database update
+4. Run the application
+dotnet run --project .\ECommerceAPI\ECommerceAPI.csproj
+5. Open Swagger
+http://localhost:5199/swagger
+
+Security
+Passwords are stored using password hashing.
+JWT authentication is used for protected APIs.
+Role-based authorization is used for Admin APIs.
+Sensitive appsettings.json configuration is excluded from Git.
+appsettings.example.json is provided as a configuration template.
+
+API Testing
+
+The API has been tested using Swagger UI.
+
+Tested functionality includes:
+
+Authentication
+Product CRUD
+Product search, filtering and sorting
+Pagination
+Cart operations
+Checkout
+Coupon validation
+Order status transitions
+Payment success/failure
+
+Admin dashboard
+Future Enhancements
+Frontend application
+Product image upload
+
+Wishlist
+Email notifications
+Real payment gateway integration
+Docker containerization
+CI/CD pipeline
+Cloud deployment
+
+Author
+
+Subodh Kumar Soni
+
+GitHub:
+https://github.com/subodhkrsoni
+
